@@ -57,6 +57,7 @@ const conf = {
   appwriteBucketId: "your_bucket_id",
 };
 export default conf;
+```
 
 ---
 
@@ -77,6 +78,5 @@ export default conf;
 - ✍️ Integrate a rich text editor (like TipTap or Quill)
 - 📑 Pagination for blog listing
 - 🚀 Deploy the project to Netlify or Vercel
-```
 
 ---
