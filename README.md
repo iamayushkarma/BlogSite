@@ -46,7 +46,17 @@ This is a simple blog site built as a practice project to learn **React** and **
 
 ## ⚙️ Environment Configuration
 
-Create a `conf.js` file inside the `src/conf/` directory with the following structure:
+1. Create a `.env file` in the `root directory` and add the following:
+
+```env
+VITE_APPWRITE_URL="https://YOUR_APPWRITE_ENDPOINT/v1"
+VITE_APPWRITE_PROJECT_ID="YOUR_PROJECT_ID"
+VITE_APPWEITE_DATABASE_ID="YOUR_DATABASE_ID"
+VITE_APPWEITE_COLLECTION_ID="YOUR_COLLECTION_ID"
+VITE_APPWEITE_BUCKET_ID="YOUR_BUCKET_ID"
+```
+
+2. Create a `conf.js` file inside the `src/conf/` directory with the following structure:
 
 ```js
 const conf = {
