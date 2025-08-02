@@ -42,6 +42,24 @@ This is a simple blog site built as a practice project to learn **React** and **
    npm run dev
    ```
 
+---
+
+## ⚙️ Environment Configuration
+
+Create a `conf.js` file inside the `src/conf/` directory with the following structure:
+
+```js
+const conf = {
+  appwriteUrl: "https://cloud.appwrite.io/v1",
+  appwriteProjectId: "your_project_id",
+  appwriteDatabaseId: "your_database_id",
+  appwriteCollectionId: "your_collection_id",
+  appwriteBucketId: "your_bucket_id",
+};
+export default conf;
+
+---
+
 ## 🎯 Learning Objectives
 
 - 🔗 How to connect React with Appwrite
@@ -51,9 +69,14 @@ This is a simple blog site built as a practice project to learn **React** and **
 - 🎨 Building UI with Tailwind CSS
 - 🧩 Managing component and service structure in a real project
 
+---
+
 ## 🚧 Future Improvements
 
 - 💬 Add a comment section to blog posts
 - ✍️ Integrate a rich text editor (like TipTap or Quill)
 - 📑 Pagination for blog listing
 - 🚀 Deploy the project to Netlify or Vercel
+```
+
+---
