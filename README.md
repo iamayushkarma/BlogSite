@@ -44,6 +44,23 @@ This is a simple blog site built as a practice project to learn **React** and **
 
 ---
 
+## 🧰 Appwrite Setup (Required)
+
+To run this project, you'll need to set up your own Appwrite backend:
+
+- 🆓 **Create a free Appwrite account** at [https://appwrite.io](https://appwrite.io) and start a new project.
+- ⚙️ **Enable the required APIs**:
+  - 🔐 Auth
+  - 🗄️ Database
+  - ☁️ Storage
+- 🗃️ **Create a Database** and note its `Database ID`.
+- 📁 **Create a Collection** inside the database (e.g., `"Posts"`) with necessary attributes like `title`, `content`, etc., and note the `Collection ID`.
+- 🖼️ **Create a Storage Bucket** for image uploads and note its `Bucket ID`.
+- 🆔 **Get your Project ID** and **API Endpoint** from your Appwrite project settings.
+- 📝 **Update your `.env` file** in the root of your project with these values:
+
+---
+
 ## ⚙️ Environment Configuration
 
 1. Create a `.env file` in the `root directory` and add the following:
