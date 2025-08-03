@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "allowJs": true, // ✅ allow JavaScript files
+    "checkJs": false, // ✅ don't show TS errors in JS
+    "jsx": "react-jsx" // ✅ JSX support
+  },
+  "include": ["src"], // ✅ restrict to just /src
+  "exclude": ["node_modules"] // ✅ ignore node_modules
+}
