@@ -36,7 +36,7 @@ function Header() {
   ];
 
   return (
-    <header className="py-3 shadow bg-gray-500">
+    <header className="py-3 shadow bg-[#0f172a] text-white">
       <Container>
         <nav className="flex">
           <div className="mr-4">
@@ -49,7 +49,7 @@ function Header() {
               item.active ? (
                 <li key={item.name}>
                   <button
-                    className="px-6 py-2 hover:bg-blue-200"
+                    className="px-6 py-2 hover:text-blue-500"
                     onClick={() => navigate(item.slug)}
                   >
                     {item.name}

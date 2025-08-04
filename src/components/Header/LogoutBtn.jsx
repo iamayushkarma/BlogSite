@@ -12,7 +12,7 @@ function LogoutBtn() {
   return (
     <button
       onClick={logoutHandler}
-      className="bg-blue-600 px-6 py-2 text-white hover:bg-blue-700 shadow-2xl"
+      className="bg-blue-600 px-6 py-2 text-white hover:bg-blue-700 shadow-2xl rounded-xl"
     >
       Logout
     </button>

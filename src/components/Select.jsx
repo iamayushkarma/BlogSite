@@ -30,21 +30,19 @@ const SelectOptions = React.forwardRef(function SelectOptions(
   const id = useId();
   return (
     <div className="w-full">
-      {/* {label && <SelectLabel htmlFor={id} className=""></SelectLabel>} */}
-      <Select id={id} ref={ref} className={``} {...props}>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a fruit" />
+      {label && <label className="block text-sm font-medium mb-2">{label}</label>}
+      <Select id={id} ref={ref} className={className} {...props}>
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder="Select an option" />
         </SelectTrigger>
         <SelectContent>
-          {options?.map((option) => (
-            <SelectGroup>
-              {/* <SelectLabel>{label}</SelectLabel> */}
-              {label && <SelectLabel htmlFor={id} className=""></SelectLabel>}
+          <SelectGroup>
+            {options?.map((option) => (
               <SelectItem key={option} value={option}>
                 {option}
               </SelectItem>
-            </SelectGroup>
-          ))}
+            ))}
+          </SelectGroup>
         </SelectContent>
       </Select>
     </div>

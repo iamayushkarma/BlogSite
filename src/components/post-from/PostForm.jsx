@@ -11,7 +11,7 @@ function PostForm({ post }) {
     useForm({
       defaultValues: {
         title: post?.title || "",
-        sulg: post?.sulg || "",
+        slug: post?.slug || "",
         content: post?.content || "",
         status: post?.status || "active",
       },
@@ -19,34 +19,49 @@ function PostForm({ post }) {
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
 
+  // Check if user is logged in
+  if (!userData) {
+    return <div className="text-center py-8">Please log in to create a post.</div>;
+  }
+
   const submit = async (data) => {
-    // If post is already present, just update it
-    if (post) {
-      const file = data.image[0] ? service.uploadFile(data.image[0]) : null;
-      if (file) {
-        service.deleteFile(post.featuredImage);
-      }
-      const dbPost = await service.updatePost(post.$id, {
-        ...data,
-        featuredImage: file ? file.$id : undefined,
-      });
-      if (dbPost) {
-        navigate(`/post/${dbPost.$id}`);
-      }
-      // Creating new entry
-    } else {
-      const file = await service.uploadFile(data.image[0]);
-      if (file) {
-        const fileId = file.$id;
-        data.featuredImage = fileId;
-        const dbPost = await service.createPost({
+    try {
+      // If post is already present, just update it
+      if (post) {
+        const file = data.image[0] ? await service.uploadFile(data.image[0]) : null;
+        if (file) {
+          service.deleteFile(post.featuredImage);
+        }
+        const dbPost = await service.updatePost(post.$id, {
           ...data,
-          userId: userData.$id,
+          featuredImage: file ? file.$id : undefined,
         });
         if (dbPost) {
-          navigate(`/post/${dbPost.$id}`);
+          navigate(`/all-posts`);
+        }
+        // Creating new entry
+      } else {
+        let fileId = null;
+        if (data.image[0]) {
+          const file = await service.uploadFile(data.image[0]);
+          fileId = file.$id;
+        }
+        
+        const dbPost = await service.createPost(
+          data.title,
+          data.slug,
+          data.content,
+          fileId,
+          data.status,
+          userData.$id
+        );
+        if (dbPost) {
+          navigate(`/all-posts`);
         }
       }
+    } catch (error) {
+      console.error("Error submitting post:", error);
+      alert("Failed to submit post. Please try again.");
     }
   };
   const slugTransform = useCallback((value) => {
@@ -61,7 +76,7 @@ function PostForm({ post }) {
   React.useEffect(() => {
     const subscription = watch((value, { name }) => {
       if (name === "title") {
-        setValue("slug", slugTransform(value.title, { shouldValidate: true }));
+        setValue("slug", slugTransform(value.title), { shouldValidate: true });
       }
     });
     return () => {
@@ -89,9 +104,10 @@ function PostForm({ post }) {
           }}
         />
         <RTE
+          label="Content :"
           name="content"
           control={control}
-          defaultValue={getValues("content")}
+          defaultVaule={getValues("content")}
         />
       </div>
       <div className="w-1/3 px-2">
@@ -100,12 +116,12 @@ function PostForm({ post }) {
           type="file"
           className="mb-4"
           accept="image/png, image/jpg, image/jpeg, image/gif"
-          {...register("image", { required: !post })}
+          {...register("image", { required: false })}
         />
         {post && (
           <div className="w-full mb-4">
             <img
-              src={appwriteService.getFilePreview(post.featuredImage)}
+              src={service.getFilePreview(post.featuredImage)}
               alt={post.title}
               className="rounded-lg"
             />

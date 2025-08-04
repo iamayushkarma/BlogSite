@@ -81,7 +81,7 @@ export class Service {
   // Returns all posts currently marked as active
   async getPosts(queries = [Query.equal("status", "active")]) {
     try {
-      return await this.databases.getDocument(
+      return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         queries
@@ -124,7 +124,7 @@ export class Service {
   // Retrieves a preview for a file stored in Appwrite using its unique ID.
   getFilePreview(fileId) {
     try {
-      return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
+      return this.bucket.getFileDownload(conf.appwriteBucketId, fileId);
     } catch (error) {
       console.error("Service -> getFilePreview():", error);
       throw new Error("Failed to get file preview.", {
