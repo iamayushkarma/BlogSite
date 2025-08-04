@@ -12,7 +12,8 @@ export class AuthService {
 
     this.account = new Account(this.client);
   }
-  // Creates a new user account using email, password, and name
+
+  // Create new user account and auto-login
   async createAccount({ email, password, name }) {
     try {
       const userAccount = await this.account.create(
@@ -21,44 +22,45 @@ export class AuthService {
         password,
         name
       );
-      // If account creation is successful, proceed with auto-login
-      if (userAccount) {
-        return this.login({ email, password });
-      } else {
-        return userAccount;
-      }
+
+      return userAccount ? this.login({ email, password }) : null;
     } catch (error) {
-      console.error("AuthService -> createAccount():", error);
-      throw new Error("Account creation failed.", { cause: error });
+      if (import.meta.env.DEV)
+        console.error("AuthService.createAccount:", error);
+      return null;
     }
   }
-  // Creating user login method
+
+  // Login user
   async login({ email, password }) {
     try {
       return await this.account.createEmailPasswordSession(email, password);
     } catch (error) {
-      console.error("AuthService -> login():", error);
-      throw new Error("User login failed.", { cause: error });
+      if (import.meta.env.DEV) console.error("AuthService.login:", error);
+      return null;
     }
   }
-  // Verifying user login status to conditionally render UI
+
+  // Get currently logged-in user
   async getCurrentUser() {
     try {
       return await this.account.get();
     } catch (error) {
-      console.error("AuthService -> getCurrentUser():", error);
-      throw new Error("Failed to fetch current user.", { cause: error });
+      // Only show detailed error if in dev mode
+      if (import.meta.env.DEV) console.warn("No user session found.");
+      return null;
     }
   }
-  // Performs user logout by deleting all active sessions
+
+  // Logout from all sessions
   async logout() {
     try {
-      await this.account.deleteSession();
+      await this.account.deleteSessions();
     } catch (error) {
-      console.error("AuthService -> logout():", error);
-      throw new Error("Failed to logout current user.", { cause: error });
+      if (import.meta.env.DEV) console.error("AuthService.logout:", error);
     }
   }
 }
+
 const authService = new AuthService();
 export default authService;

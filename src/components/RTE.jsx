@@ -1,73 +1,65 @@
-import React from "react";
+// RTE.jsx
 import { Editor } from "@tinymce/tinymce-react";
+import { useRef } from "react";
+import conf from "@/conf/conf";
 import { Controller } from "react-hook-form";
 
-function RTE({ name, control, label, defaultVaule = "" }) {
-  return (
-    <div className="w-full">
-      {label && <label className="inline-block mb-1 pl-1">{label}</label>}
+export default function RTE({ name, control, defaultValue = "" }) {
+  const editorRef = useRef(null);
 
+  return (
+    <div className="relative z-50">
       <Controller
-        name={name || "Content"}
+        name={name}
         control={control}
-        render={({ field: { onChange } }) => (
+        defaultValue={defaultValue}
+        render={({ field: { onChange, value } }) => (
           <Editor
-            initialValue={defaultVaule}
+            apiKey={conf.tineymceapikey}
+            onInit={(evt, editor) => (editorRef.current = editor)}
+            value={value}
+            onEditorChange={(newValue) => onChange(newValue)}
             init={{
-              initialValue: { defaultVaule },
-              height: 500,
+              height: 400,
               menubar: true,
+              inline: false,
               plugins: [
-                // Core editing features
-                "anchor",
+                "advlist",
                 "autolink",
-                "charmap",
-                "codesample",
-                "emoticons",
-                "image",
-                "link",
                 "lists",
-                "media",
+                "link",
+                "image",
+                "charmap",
+                "preview",
+                "anchor",
                 "searchreplace",
-                "table",
                 "visualblocks",
+                "code",
+                "fullscreen",
+                "insertdatetime",
+                "media",
+                "table",
+                "code",
+                "help",
                 "wordcount",
-                "checklist",
-                "mediaembed",
-                "casechange",
-                "formatpainter",
-                "pageembed",
-                "a11ychecker",
-                "tinymcespellchecker",
-                "permanentpen",
-                "powerpaste",
-                "advtable",
-                "advcode",
-                "editimage",
-                "advtemplate",
-                "ai",
-                "mentions",
-                "tinycomments",
-                "tableofcontents",
-                "footnotes",
-                "mergetags",
-                "autocorrect",
-                "typography",
-                "inlinecss",
-                "markdown",
-                "importword",
-                "exportword",
-                "exportpdf",
               ],
               toolbar:
-                "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+                "undo redo | formatselect | " +
+                "bold italic underline | alignleft aligncenter " +
+                "alignright alignjustify | bullist numlist outdent indent | " +
+                "removeformat | help",
+              content_style:
+                "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+              branding: false,
+              setup: (editor) => {
+                editor.on("init", () => {
+                  editor.focus();
+                });
+              },
             }}
-            onEditorChange={onChange}
           />
         )}
       />
     </div>
   );
 }
-
-export default RTE;

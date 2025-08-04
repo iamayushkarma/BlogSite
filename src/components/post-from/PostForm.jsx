@@ -1,9 +1,10 @@
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Input, Select } from "../index.js";
+import { Button, Input, SelectOptions } from "../index.js";
 import service from "../../appwrite/config.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { RTE } from "../index.js";
 
 function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } =
@@ -16,7 +17,7 @@ function PostForm({ post }) {
       },
     });
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.user.userData);
+  const userData = useSelector((state) => state.auth.userData);
 
   const submit = async (data) => {
     // If post is already present, just update it
@@ -28,11 +29,10 @@ function PostForm({ post }) {
       const dbPost = await service.updatePost(post.$id, {
         ...data,
         featuredImage: file ? file.$id : undefined,
-
-        if(dbPost) {
-          navigate(`/post/${dbPost.$id}`);
-        },
       });
+      if (dbPost) {
+        navigate(`/post/${dbPost.$id}`);
+      }
       // Creating new entry
     } else {
       const file = await service.uploadFile(data.image[0]);
@@ -89,7 +89,6 @@ function PostForm({ post }) {
           }}
         />
         <RTE
-          label="Content :"
           name="content"
           control={control}
           defaultValue={getValues("content")}
@@ -112,7 +111,7 @@ function PostForm({ post }) {
             />
           </div>
         )}
-        <Select
+        <SelectOptions
           options={["active", "inactive"]}
           label="Status"
           className="mb-4"

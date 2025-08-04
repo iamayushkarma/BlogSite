@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const SelectOptions = function (
+const SelectOptions = React.forwardRef(function SelectOptions(
   { options, label, className = "", ...props },
   ref
 ) {
@@ -49,6 +49,5 @@ const SelectOptions = function (
       </Select>
     </div>
   );
-};
-
-export default React.forwardRef(SelectOptions);
+});
+export default SelectOptions;

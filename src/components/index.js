@@ -11,7 +11,7 @@ import PostCard from "./PostCard";
 import PostForm from "./post-from/PostForm";
 import Protected from "./AuthLayout.jsx";
 import SelectOptions from "./Select.jsx";
-import Input from "./Input";
+import Input from "./Input.jsx";
 
 export {
   Header,

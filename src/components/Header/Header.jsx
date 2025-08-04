@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Logo, LogoutBtn } from "../index";
+import { Container, Logo, LogoutBtn } from "../index.js";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ function Header() {
       active: !authStatus,
     },
     {
-      name: "Signip",
+      name: "Signup",
       slug: "/signup",
       active: !authStatus,
     },
@@ -29,9 +29,9 @@ function Header() {
       active: !authStatus,
     },
     {
-      name: "Login",
-      slug: "/login",
-      active: !authStatus,
+      name: "Add Post",
+      slug: "/add-post",
+      active: authStatus,
     },
   ];
 

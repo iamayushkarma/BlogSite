@@ -5,7 +5,7 @@ import {
   FaGithub,
   FaYoutube,
 } from "react-icons/fa6";
-import Logo from "../index.js";
+import Logo from "../Logo.jsx";
 
 export default function Footer() {
   return (
