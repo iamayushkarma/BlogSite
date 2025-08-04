@@ -71,6 +71,7 @@ VITE_APPWRITE_PROJECT_ID="YOUR_PROJECT_ID"
 VITE_APPWEITE_DATABASE_ID="YOUR_DATABASE_ID"
 VITE_APPWEITE_COLLECTION_ID="YOUR_COLLECTION_ID"
 VITE_APPWEITE_BUCKET_ID="YOUR_BUCKET_ID"
+VITE_TINEYMCE_API_KEY="YOUR_TINEYMCE_API_KEY"
 
 ```
 
@@ -83,6 +84,7 @@ const conf = {
   appwriteDatabaseId: "your_database_id",
   appwriteCollectionId: "your_collection_id",
   appwriteBucketId: "your_bucket_id",
+  tineymceapikey: "your_tineymce_api_key",
 };
 export default conf;
 ```

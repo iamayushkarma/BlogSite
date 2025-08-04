@@ -29,12 +29,12 @@ function Login() {
     }
   };
   return (
-    <div className="flex items-center justify-center w-full">
+    <div className="flex items-center justify-center w-full p-15">
       <div
-        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
+        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10 shadow-xs`}
       >
-        <div className="mb-2 flex justify-center">
-          <span className="inline-block w-full max-w-[100px]">
+        <div className="mb-2 flex justify-center mx-auto  ">
+          <span className="flex justify-center w-full max-w-[100px] mx-auto">
             <Logo />
           </span>
         </div>
@@ -75,7 +75,9 @@ function Login() {
               // Compulsory to spread
               {...register("password", { required: true })}
             />
-            <Button type="submit">Sign in</Button>
+            <div className="w-full flex justify-center">
+              <Button type="submit">Sign in</Button>
+            </div>
           </div>
         </form>
       </div>

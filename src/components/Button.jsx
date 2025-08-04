@@ -11,7 +11,7 @@ function Button({
   // children is the inner text which will be displayed inside this button
   return (
     <button
-      className={`px-4 py-2 rounded-lg ${className} ${textColor} ${bgColor}`}
+      className={`px-6 py-2 rounded-lg ${className} ${textColor} ${bgColor}`}
       {...props}
     >
       {children}
