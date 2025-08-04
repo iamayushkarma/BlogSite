@@ -11,7 +11,7 @@
 // }
 
 // export default Select;
-import * as React from "react";
+import React, { useId } from "react";
 
 import {
   Select,
@@ -27,7 +27,7 @@ const SelectOptions = function (
   { options, label, className = "", ...props },
   ref
 ) {
-  const id = useId;
+  const id = useId();
   return (
     <div className="w-full">
       {/* {label && <SelectLabel htmlFor={id} className=""></SelectLabel>} */}
@@ -45,14 +45,6 @@ const SelectOptions = function (
               </SelectItem>
             </SelectGroup>
           ))}
-          {/* 
-            <SelectLabel>Fruits</SelectLabel>
-            <SelectItem value="apple">Apple</SelectItem>
-            <SelectItem value="banana">Banana</SelectItem>
-            <SelectItem value="blueberry">Blueberry</SelectItem>
-            <SelectItem value="grapes">Grapes</SelectItem>
-            <SelectItem value="pineapple">Pineapple</SelectItem>
-          </SelectGroup> */}
         </SelectContent>
       </Select>
     </div>

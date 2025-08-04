@@ -8,7 +8,7 @@ import { Outlet } from "react-router-dom";
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   // Checking user and its current state for conditional rendering
   useEffect(() => {
@@ -28,7 +28,9 @@ function App() {
     <div className="min-h-screen flex flex-wrap content-between bg-gray-100">
       <div className="w-full block">
         <Header />
-        <main>{/* <Outlet /> */}</main>
+        <main>
+          <Outlet />
+        </main>
         <Footer />
       </div>
     </div>
