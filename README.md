@@ -1,4 +1,4 @@
-# 📝 Blog Site
+# Blog Site
 
 This is a simple blog site built as a practice project to learn **React** and **Appwrite**. It allows users to register, log in, create, update, and delete blog posts, as well as upload and preview images.
 
